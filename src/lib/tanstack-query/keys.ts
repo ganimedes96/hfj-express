@@ -1,0 +1,16 @@
+export enum QueryKeys {
+  user = "user",
+  metricsByCategory = "metricsByCategory",
+  topProductsInStockValue= "topProductsInStockValue",
+  clients = "clients",
+  categories = "categories",
+  suppliers = "suppliers",
+  movements = "movements",
+  products = "products",
+  employees = "employees",
+  overview = "overview",
+  debtors = "debtors",
+  metricsMovements = "metricsMovements",
+  annualGains = "annualGains",
+  packages = "packages",
+}
