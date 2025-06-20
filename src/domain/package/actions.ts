@@ -94,7 +94,7 @@ export async function updatePackageStatus(userId: string, status: string, id: st
       .doc(userId)
       .collection(Collections.packages)
       .doc(id)
-      .update({ status });
+      .update({ status, updatedAt: firebaseAdmin.firestore.Timestamp.now() });
     return {
       status: StatusServer.success,
       message: "Pacote atualizado com sucesso",
