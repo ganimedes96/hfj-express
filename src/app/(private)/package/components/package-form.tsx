@@ -46,7 +46,6 @@ export function FormRegister({ user }: PackageFormProps) {
   });
 
   async function onSubmit(data: PackageFormData) {
-    console.log(data);
 
     await mutateAsync(
       {

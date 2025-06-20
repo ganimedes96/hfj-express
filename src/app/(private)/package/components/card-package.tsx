@@ -51,11 +51,17 @@ export function CardPackage({ delivery, user }: Delivery) {
     }
   };
 
-  const openInMaps = (address: string) => {
-    const encodedAddress = encodeURIComponent(address);
-    const mapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodedAddress}`;
+  const openInMaps = (address: string, cep: string) => {
+    // Combinar endereço e CEP para mais precisão
+    const fullAddress = `${address}, ${cep}`;
+    const encodedAddress = encodeURIComponent(fullAddress);
+    // A URL correta para buscar e exibir um endereço
+    const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodedAddress}`;
     window.open(mapsUrl, "_blank");
   };
+
+  
+
   return (
     <Card key={delivery.id} className="bg-transparent mt-6">
       <CardHeader className="pb-3">
@@ -65,10 +71,9 @@ export function CardPackage({ delivery, user }: Delivery) {
               {delivery.nameProduct}
             </CardTitle>
             <div className="flex flex-row gap-4 items-center justify-center">
-
-            <p className="text-sm text-muted-foreground mt-1">
-              Para: {delivery.nameDestinary} 
-            </p>
+              <p className="text-sm text-muted-foreground mt-1">
+                Para: {delivery.nameDestinary}
+              </p>
               <WhatsAppButton
                 variant="outline"
                 phone={delivery.phone || ""}
@@ -103,11 +108,11 @@ export function CardPackage({ delivery, user }: Delivery) {
           <Button
             variant="outline"
             size="sm"
-            onClick={() => openInMaps(delivery.address)}
+            onClick={() => openInMaps(delivery.address, delivery.cep || "")} // Passe o endereço e o CEP
             className="flex-1"
           >
             <Navigation className="h-4 w-4 mr-2" />
-            Abrir Rota
+            Abrir no Mapa
           </Button>
 
           <div className="flex flex-row gap-2">

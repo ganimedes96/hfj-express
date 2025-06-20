@@ -13,6 +13,7 @@ export async function CreatePackage(userId: string, data: CreatePackageType) {
       nameDestinary: data.nameDestinary,
       nameProduct: data.nameProduct,
       address: data.address,
+      status: data.status,
       cep: data.cep || "",
       phone: data.phone || "",
       description: data.description || "",
