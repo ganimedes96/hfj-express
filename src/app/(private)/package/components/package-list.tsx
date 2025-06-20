@@ -36,21 +36,16 @@ export function PackageList({ user }: PackageListProps) {
   const [isConfirmDialogOpen, setIsConfirmDialogOpen] = useState(false);
   const [filter, setFilter] = useState<FilterType>("today");
   const { data: packages = [] } = useGetPackages(user.id);
-
-  // Estados da otimização
   const [isLoading, setIsLoading] = useState(false);
   const [routeBatches, setRouteBatches] = useState<Package[][] | null>(null);
-  const [orderedPackages, setOrderedPackages] = useState<Package[] | null>(
-    null
-  );
+  const [orderedPackages, setOrderedPackages] = useState<Package[] | null>(null);
 
   const filteredPackages = packages.filter((pkg) => {
     if (filter === "all") return true;
     if (filter === "today") {
       return (
         isToday(new Date(pkg.createdAt)) &&
-        (pkg.status === StatusPackage.PENDING ||
-          pkg.status === StatusPackage.IN_TRANSIT)
+        (pkg.status === StatusPackage.PENDING || pkg.status === StatusPackage.IN_TRANSIT)
       );
     }
     return pkg.status === filter;
@@ -59,17 +54,13 @@ export function PackageList({ user }: PackageListProps) {
   const packagesToShow = orderedPackages || filteredPackages;
 
   const handleOpenBatchRoute = (batch: Package[]) => {
-    // AJUSTE: Simplificado para abrir no Google Maps com a localização atual como partida.
     navigator.geolocation.getCurrentPosition((position) => {
       const { latitude, longitude } = position.coords;
       const currentPos = `${latitude},${longitude}`;
       const waypoints = batch
         .map((pkg) => encodeURIComponent(`${pkg.address}, ${pkg.cep}`))
         .join("|");
-
-      // O destino final é o último item do lote para criar uma rota mais coerente.
       const destination = batch[batch.length - 1];
-
       const mapsUrl = `https://www.google.com/maps/dir/?api=1&origin=${currentPos}&destination=${encodeURIComponent(
         `${destination.address}, ${destination.cep}`
       )}&waypoints=${waypoints}`;
@@ -84,13 +75,9 @@ export function PackageList({ user }: PackageListProps) {
     setRouteBatches(null);
 
     try {
-      const userLocation = await new Promise<GeolocationPosition>(
-        (resolve, reject) => {
-          navigator.geolocation.getCurrentPosition(resolve, reject, {
-            timeout: 10000,
-          });
-        }
-      );
+      const userLocation = await new Promise<GeolocationPosition>((resolve, reject) => {
+        navigator.geolocation.getCurrentPosition(resolve, reject, { timeout: 10000 });
+      });
       const { latitude, longitude } = userLocation.coords;
       const origin = `${latitude},${longitude}`;
 
@@ -106,24 +93,31 @@ export function PackageList({ user }: PackageListProps) {
       }
 
       const data = await response.json();
-      setOrderedPackages(data.orderedPackages);
-      setRouteBatches(data.routeBatches);
+      
+      // DEBUG: Verifique o que a API está retornando
+      console.log("DADOS RECEBIDOS DA API:", data);
 
-      // REMOVIDO: Abertura automática do mapa. O usuário agora tem os botões para fazer isso.
+      // Certifique-se de que os dados têm a estrutura esperada antes de setar o estado
+      if (data.orderedPackages && data.routeBatches) {
+        setOrderedPackages(data.orderedPackages);
+        setRouteBatches(data.routeBatches);
+      } else {
+        throw new Error("A resposta da API não continha os dados esperados.");
+      }
+
     } catch (error) {
-      alert(
-        error instanceof Error ? error.message : "Ocorreu um erro desconhecido."
-      );
+      console.error("ERRO NO PROCESSO DE OTIMIZAÇÃO:", error);
+      alert(error instanceof Error ? error.message : "Ocorreu um erro desconhecido.");
     } finally {
       setIsLoading(false);
     }
   };
 
-  // NOVO: Função para limpar a rota otimizada e voltar ao estado original.
   const handleClearOptimization = () => {
     setOrderedPackages(null);
     setRouteBatches(null);
   };
+
 
   return (
     <div>
