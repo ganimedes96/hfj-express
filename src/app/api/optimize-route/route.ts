@@ -26,7 +26,7 @@ export async function POST(request: Request) {
         destination: origin,
         waypoints: waypoints,
         optimize: true,
-        key: process.env.Maps_API_KEY as string,
+        key: process.env.MAPS_API_KEY as string,
         language: Language.pt_BR,
       },
     });
