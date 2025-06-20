@@ -65,7 +65,7 @@ export function FormModal({
           </Button>
         )}
       </DialogTrigger>
-      <DialogContent className={className || "sm:max-w-[425px]"}>
+      <DialogContent className={className || "m-0 p-2 w-full"}>
         <DialogHeader>
           <DialogTitle>{title}</DialogTitle>
           <DialogDescription>{description}</DialogDescription>

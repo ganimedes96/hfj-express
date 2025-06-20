@@ -15,11 +15,9 @@ export default async function Package() {
   return (
     <>
       <Header user={user} />
-      <div className="min-h-screen  p-4 ">
-        <div className="max-w-4xl mx-auto">
           <FormModal
-            title="Adicionar cliente"
-            description="Adicione um novo cliente ao seu sistema."
+            title="Novo pacote"
+            description="Adicione um novo pacote"
             formComponent={FormRegister}
             formProps={{ user }}
             customButton={
@@ -29,6 +27,8 @@ export default async function Package() {
               />
             }
           />
+      <div className="min-h-screen  p-4 ">
+        <div className="max-w-4xl mx-auto">
           <PackageList user={user} />
         </div>
       </div>

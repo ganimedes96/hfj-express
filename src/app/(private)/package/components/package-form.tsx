@@ -76,6 +76,23 @@ export function FormRegister({ user }: PackageFormProps) {
         name="nameDestinary"
         label="Nome do destinatario *"
       />
+      <div className="grid grid-cols-2 gap-2">
+        <ControlledInput
+          control={control}
+          placeholder="Ex: 12345678"
+          name="phone"
+          label="Telefone "
+          maskType="phoneMobile"
+        />
+
+        <ControlledInput
+          control={control}
+          placeholder="Ex: 12345678"
+          name="cep"
+          label="CEP "
+          maskType="cep"
+        />
+      </div>
       <ControlledInput
         control={control}
         placeholder="Ex: Rua das Flores, 123 - Centro, Timon - MA"
@@ -83,23 +100,6 @@ export function FormRegister({ user }: PackageFormProps) {
         label="Endereço de entrega *"
       />
 
-      <ControlledInput
-        control={control}
-        placeholder="Ex: 12345678"
-        name="phone"
-        type="number"
-        label="Telefone "
-        maskType="phoneMobile"
-      />
-
-      <ControlledInput
-        control={control}
-        placeholder="Ex: 12345678"
-        name="cep"
-        type="number"
-        label="CEP "
-        maskType="cep"
-      />
       <ControlledTextarea
         control={control}
         limit={100}
