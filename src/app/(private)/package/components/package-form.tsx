@@ -11,7 +11,7 @@ import { StatusPackage } from "@/domain/package/types";
 import { ControlledTextarea } from "@/components/form/controllers/controlled-text-area";
 
 const packageSchema = z.object({
-  nameProduct: z.string().min(1, "O nome do produto e obrigatorio"),
+  nameProduct: z.string().optional(),
   nameDestinary: z.string().min(1, "O nome do destinatario e obrigatorio"),
   address: z.string().min(1, "O endereco e obrigatorio"),
   cep: z.string().optional(),
@@ -67,7 +67,7 @@ export function FormRegister({ user }: PackageFormProps) {
         control={control}
         placeholder="Ex: Notebook"
         name="nameProduct"
-        label="Nome do produto *"
+        label="Nome do produto"
       />
 
       <ControlledInput

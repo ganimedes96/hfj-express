@@ -10,7 +10,7 @@ import { CreatePackageType, Package } from "./types";
 export async function CreatePackage(userId: string, data: CreatePackageType) {
   try {
     const body = {
-      nameDestinary: data.nameDestinary,
+      nameDestinary: data.nameDestinary || "",
       nameProduct: data.nameProduct,
       address: data.address,
       status: data.status,

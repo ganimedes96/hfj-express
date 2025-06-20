@@ -8,7 +8,7 @@ export enum StatusPackage {
 
 export type Package = {
     id: string;
-    nameProduct: string;
+    nameProduct?: string;
     address: string;
     phone?: string;
     nameDestinary: string;
