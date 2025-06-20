@@ -11,10 +11,11 @@ import { WhatsAppButton } from "./button-whatsapp";
 interface Delivery {
   delivery: Package;
   user: User;
+  numberPackage: number;
 }
 
 type DeliveryStatus = StatusPackage;
-export function CardPackage({ delivery, user }: Delivery) {
+export function CardPackage({ delivery, user, numberPackage }: Delivery) {
   const { mutateAsync } = useUpdatePackageSatus(user.id);
 
   const getStatusText = (status: DeliveryStatus) => {
@@ -60,11 +61,17 @@ export function CardPackage({ delivery, user }: Delivery) {
     window.open(mapsUrl, "_blank");
   };
 
-  
-
   return (
     <Card key={delivery.id} className="bg-transparent mt-6">
-      <CardHeader className="pb-3">
+      <CardHeader >
+        <div className="flex items-center justify-between">
+          <div className="text-md rounded-full border border-yellow-500">
+            <span className="p-2 ">{numberPackage}</span>
+          </div>
+          <Badge className={getStatusColor(delivery.status)}>
+            {getStatusText(delivery.status)}
+          </Badge>
+        </div>
         <div className="flex items-start justify-between">
           <div>
             <CardTitle className="text-lg font-semibold ">
@@ -82,14 +89,11 @@ export function CardPackage({ delivery, user }: Delivery) {
               />
             </div>
           </div>
-          <Badge className={getStatusColor(delivery.status)}>
-            {getStatusText(delivery.status)}
-          </Badge>
         </div>
       </CardHeader>
       <CardContent className="space-y-4">
         <div className="flex items-start gap-2">
-          <MapPin className="h-4 w-4  mt-0.5 flex-shrink-0" />
+          <MapPin className="h-4 w-4  mt-1 flex-shrink-0" />
           <div className="text-sm  leading-relaxed">
             <p>{delivery.address.toLocaleUpperCase()}</p>
             <p className="text-gray-500">CEP: {delivery.cep}</p>
