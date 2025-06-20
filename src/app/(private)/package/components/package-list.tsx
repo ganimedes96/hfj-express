@@ -5,7 +5,7 @@ import { useGetPackages } from "@/domain/package/queries";
 import { User } from "@/domain/user/types";
 import { CardPackage } from "./card-package";
 import { Card, CardContent } from "@/components/ui/card";
-import { Navigation, Package as PackageIcon } from "lucide-react";
+import { LocateFixed, Package as PackageIcon } from "lucide-react";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { Badge } from "@/components/ui/badge";
 import { StatusPackage } from "@/domain/package/types";
@@ -118,9 +118,9 @@ export function PackageList({ user }: PackageListProps) {
         <Dialog open={isConfirmDialogOpen} onOpenChange={setIsConfirmDialogOpen}>
           <DialogTrigger asChild>
             <div className="mt-4 px-1">
-              <Button className="w-full bg-blue-600 hover:bg-blue-700">
-                <Navigation className="h-4 w-4 mr-2" />
-                Otimizar Rota do Dia
+              <Button className="w-full text-gray-200 bg-blue-600 hover:bg-blue-700">
+                <LocateFixed  className="h-4 w-4" />
+                Otimizar Rotas do Dia
               </Button>
             </div>
           </DialogTrigger>
