@@ -46,7 +46,6 @@ export function FormRegister({ user }: PackageFormProps) {
   });
 
   async function onSubmit(data: PackageFormData) {
-
     await mutateAsync(
       {
         ...data,
@@ -79,9 +78,9 @@ export function FormRegister({ user }: PackageFormProps) {
       />
       <ControlledInput
         control={control}
-        placeholder="Ex: Rua da paz, 123"
+        placeholder="Ex: Rua das Flores, 123 - Centro, Timon - MA"
         name="address"
-        label="Endereco de entrega *"
+        label="Endereço de entrega *"
       />
 
       <ControlledInput
