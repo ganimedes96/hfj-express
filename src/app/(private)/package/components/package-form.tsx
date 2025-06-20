@@ -87,6 +87,7 @@ export function FormRegister({ user }: PackageFormProps) {
         control={control}
         placeholder="Ex: 12345678"
         name="phone"
+        type="number"
         label="Telefone "
         maskType="phoneMobile"
       />
@@ -95,6 +96,7 @@ export function FormRegister({ user }: PackageFormProps) {
         control={control}
         placeholder="Ex: 12345678"
         name="cep"
+        type="number"
         label="CEP "
         maskType="cep"
       />
