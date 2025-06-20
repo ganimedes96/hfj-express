@@ -9,7 +9,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { LockIcon, Mail, Phone } from "lucide-react";
+import { LockIcon, Mail, Phone, User } from "lucide-react";
 import { ControlledInput } from "@/components/form/controllers/controlled-input";
 import { Button } from "@/components/ui/button";
 import { useCreateUserServer } from "@/domain/user/queries";
@@ -78,7 +78,7 @@ export function FormRegister() {
   return (
     <Card className="w-full max-w-[600px]">
       <CardHeader className="flex flex-col items-center">
-        <Image src={Logo} alt="Logo" width={200} height={200} />
+        <Image src={Logo} alt="Logo" width={100} height={100} />
         <CardTitle className="text-2xl">Criar sua conta</CardTitle>
         <CardDescription>
           Preencha os dados para começar seu teste gratuito
@@ -90,7 +90,9 @@ export function FormRegister() {
             control={control}
             placeholder="Silva de Souza"
             name="name"
-            label="Sobrenome *"
+            iconPosition="left"
+            icon={<User className="h-4 w-4 text-muted-foreground" />}
+            label="Nome *"
           />
 
           <ControlledInput
@@ -123,7 +125,7 @@ export function FormRegister() {
             placeholder="Selecione um perfil"
           />
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <ControlledInput
               control={control}
               placeholder="minimo 6 caracteres"

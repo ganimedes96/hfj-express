@@ -51,7 +51,7 @@ export function LoginForm() {
   return (
     <div className="flex flex-col">
       <div className="flex flex-col items-center justify-center gap-4 mb-6">
-        <Image src={Logo} alt="Logo" width={200} height={200} />
+        <Image src={Logo} alt="Logo" width={100} height={100} />
          <h2 className="text-2xl">Bem-vindo de volta</h2>
       </div>
       <form onSubmit={handleSubmit} className="grid gap-6">
