@@ -6,6 +6,7 @@ import { useUpdatePackageSatus } from "@/domain/package/queries";
 import { Package, StatusPackage } from "@/domain/package/types";
 import { User } from "@/domain/user/types";
 import { Bike, Check, MapPin, Navigation, X } from "lucide-react";
+import { WhatsAppButton } from "./button-whatsapp";
 
 interface Delivery {
   delivery: Package;
@@ -63,9 +64,18 @@ export function CardPackage({ delivery, user }: Delivery) {
             <CardTitle className="text-lg font-semibold ">
               {delivery.nameProduct}
             </CardTitle>
+            <div className="flex flex-row gap-4 items-center justify-center">
+
             <p className="text-sm text-muted-foreground mt-1">
-              Para: {delivery.nameDestinary}
+              Para: {delivery.nameDestinary} 
             </p>
+              <WhatsAppButton
+                variant="outline"
+                phone={delivery.phone || ""}
+                message="Ola, sou o entregador"
+                isMobile={false}
+              />
+            </div>
           </div>
           <Badge className={getStatusColor(delivery.status)}>
             {getStatusText(delivery.status)}
@@ -112,26 +122,27 @@ export function CardPackage({ delivery, user }: Delivery) {
               </Button>
             )}
 
-            {(delivery.status !== StatusPackage.DELIVERED && delivery.status !== StatusPackage.CANCELED) && (
-              <>
-                <Button
-                  size="sm"
-                  variant={"outline"}
-                  onClick={() => handleUpdateStatus(StatusPackage.DELIVERED)}
-                  className="flex-1 border-[1px] border-emerald-500  hover:bg-green-700"
-                >
-                  <Check className="h-4 w-4 text-green-600" />
-                </Button>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => handleUpdateStatus(StatusPackage.CANCELED)}
-                  className="flex-1 border-[1px] border-red-500  hover:bg-red-700"
-                >
-                  <X className="h-4 w-4 text-red-500" />
-                </Button>
-              </>
-            )}
+            {delivery.status !== StatusPackage.DELIVERED &&
+              delivery.status !== StatusPackage.CANCELED && (
+                <>
+                  <Button
+                    size="sm"
+                    variant={"outline"}
+                    onClick={() => handleUpdateStatus(StatusPackage.DELIVERED)}
+                    className="flex-1 border-[1px] border-emerald-500  hover:bg-green-700"
+                  >
+                    <Check className="h-4 w-4 text-green-600" />
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => handleUpdateStatus(StatusPackage.CANCELED)}
+                    className="flex-1 border-[1px] border-red-500  hover:bg-red-700"
+                  >
+                    <X className="h-4 w-4 text-red-500" />
+                  </Button>
+                </>
+              )}
           </div>
         </div>
       </CardContent>

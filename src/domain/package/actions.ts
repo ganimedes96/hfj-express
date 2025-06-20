@@ -10,7 +10,12 @@ import { CreatePackageType, Package } from "./types";
 export async function CreatePackage(userId: string, data: CreatePackageType) {
   try {
     const body = {
-      ...data,
+      nameDestinary: data.nameDestinary,
+      nameProduct: data.nameProduct,
+      address: data.address,
+      cep: data.cep || "",
+      phone: data.phone || "",
+      description: data.description || "",
       createdAt: firebaseAdmin.firestore.Timestamp.now(),
     };
 

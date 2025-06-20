@@ -10,6 +10,7 @@ export type Package = {
     id: string;
     nameProduct: string;
     address: string;
+    phone?: string;
     nameDestinary: string;
     cep?: string;
     status: StatusPackage;

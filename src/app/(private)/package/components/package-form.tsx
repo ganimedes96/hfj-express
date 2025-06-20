@@ -15,6 +15,7 @@ const packageSchema = z.object({
   nameDestinary: z.string().min(1, "O nome do destinatario e obrigatorio"),
   address: z.string().min(1, "O endereco e obrigatorio"),
   cep: z.string().optional(),
+  phone: z.string().optional(),
   description: z.string().optional(),
 });
 
@@ -38,6 +39,7 @@ export function FormRegister({ user }: PackageFormProps) {
       nameProduct: "",
       nameDestinary: "",
       address: "",
+      phone: "",
       cep: "",
       description: "",
     },
@@ -86,6 +88,14 @@ export function FormRegister({ user }: PackageFormProps) {
       <ControlledInput
         control={control}
         placeholder="Ex: 12345678"
+        name="phone"
+        label="Telefone "
+        maskType="phoneMobile"
+      />
+
+      <ControlledInput
+        control={control}
+        placeholder="Ex: 12345678"
         name="cep"
         label="CEP "
         maskType="cep"
@@ -95,7 +105,7 @@ export function FormRegister({ user }: PackageFormProps) {
         limit={100}
         placeholder="Ex: Descrição do produto"
         name="description"
-        label="Descrição *"
+        label="Descrição"
       />
 
       <Button disabled={isSubmitting} className="w-full" type="submit">
